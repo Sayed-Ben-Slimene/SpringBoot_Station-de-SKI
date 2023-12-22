@@ -1,18 +1,21 @@
 package tn.esprit.stationdesky.Services;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.esprit.stationdesky.Respository.PisteRepo;
 import tn.esprit.stationdesky.Respository.SkieurRepo;
 import tn.esprit.stationdesky.entities.Piste;
 import tn.esprit.stationdesky.entities.Skieur;
 
 import java.util.List;
-
+@AllArgsConstructor
+@Service
 public class PisteService implements IPisteService {
+    @Autowired
     PisteRepo pisteRepositroy;
+    @Autowired
     SkieurRepo skieurRepository;
-    public PisteService(PisteRepo pisteRepositroy) {
-        this.pisteRepositroy = pisteRepositroy;
-    }
     @Override
     public Piste add (Piste piste) {
         return pisteRepositroy.save(piste);
@@ -44,6 +47,5 @@ public class PisteService implements IPisteService {
         Skieur skieur=skieurRepository.findById(numSkieur).orElseThrow(null);
         Piste piste =pisteRepositroy.findById(numPiste).orElseThrow(null);
         piste.getSkieurs().add(skieur);
-
         return skieurRepository.save(skieur);    }
 }

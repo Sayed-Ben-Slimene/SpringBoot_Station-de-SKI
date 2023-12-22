@@ -1,5 +1,7 @@
 package tn.esprit.stationdesky.Services;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.stationdesky.Respository.AbonnementRepo;
 import tn.esprit.stationdesky.Respository.CoursRepo;
@@ -11,18 +13,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
 @Service
 public class SkieurService implements ISkieurService{
 
-
+    @Autowired
     SkieurRepo skieurRepo;
+    @Autowired
     InscriptionRepo inscriptionRepo;
+    @Autowired
     AbonnementRepo abonnementRepo;
+    @Autowired
     CoursRepo coursRepo;
-    public SkieurService(SkieurRepo skieurRepo) {
-        this.skieurRepo = skieurRepo;
-    }
-
 
     @Override
     public Skieur addSkieur(Skieur skieur) {
@@ -41,7 +43,7 @@ public class SkieurService implements ISkieurService{
 
     @Override
     public void deleteSkieur(long id) {
-         skieurRepo.findById(id);
+        skieurRepo.deleteById (id);
     }
 
     @Override

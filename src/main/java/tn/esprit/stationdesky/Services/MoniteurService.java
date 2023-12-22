@@ -1,5 +1,7 @@
 package tn.esprit.stationdesky.Services;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.stationdesky.Respository.CoursRepo;
 import tn.esprit.stationdesky.Respository.MoniteurRepo;
@@ -10,14 +12,13 @@ import tn.esprit.stationdesky.entities.Support;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
 @Service
 public class MoniteurService implements IMoniteurService{
-
+    @Autowired
     CoursRepo coursRepo;
+    @Autowired
     MoniteurRepo moniteurRepo;
-    public MoniteurService(MoniteurRepo moniteurRepo) {
-        this.moniteurRepo = moniteurRepo;
-    }
 
     @Override
     public Moniteur addMoniteur(Moniteur moniteur) {

@@ -23,10 +23,14 @@ public class Skieur implements Serializable {
     String prenomS;
     LocalDate dateNaissance;
     String ville;
-    @ManyToMany
+
+    @ManyToMany(mappedBy="skieurs")
     private Set<Piste> pistes;
+
+
     @OneToMany(mappedBy="skieur",cascade = CascadeType.ALL)
     private Set<Inscription> inscriptions;
+
     @OneToOne(cascade = CascadeType.ALL)
     Abonnement abonnement;
     

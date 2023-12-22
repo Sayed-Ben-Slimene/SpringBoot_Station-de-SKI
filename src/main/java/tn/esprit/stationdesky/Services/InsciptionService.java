@@ -1,6 +1,7 @@
 package tn.esprit.stationdesky.Services;
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.stationdesky.Respository.CoursRepo;
 import tn.esprit.stationdesky.Respository.InscriptionRepo;
@@ -12,24 +13,20 @@ import tn.esprit.stationdesky.entities.Skieur;
 import tn.esprit.stationdesky.entities.TypeCours;
 
 import java.util.List;
+@AllArgsConstructor
 @Service
 public class InsciptionService implements IInscription{
+    @Autowired
     InscriptionRepo InscriptionRepo;
+    @Autowired
     SkieurRepo SkieurRepo;
+    @Autowired
     CoursRepo coursRepository;
-
-
-
-    public InsciptionService(InscriptionRepo InscriptionRepo) {
-        this.InscriptionRepo = InscriptionRepo;
-    }
 
     @Override
     public Inscription add(Inscription inscription) {
         return InscriptionRepo.save(inscription);
     }
-
-
 
     @Override
     public Inscription update(Inscription inscription) {

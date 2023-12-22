@@ -24,6 +24,7 @@ public class Piste implements Serializable {
     Couleur couleur;
     int longeur;
     int pente;
+
     @ManyToMany
     private Set<Skieur> skieurs;
 

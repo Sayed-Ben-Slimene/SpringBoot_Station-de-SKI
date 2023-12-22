@@ -22,6 +22,7 @@ public class Moniteur implements Serializable {
     String nomM;
     String prenomM;
     LocalDate dateRecru;
+
     @OneToMany
     private Set<Cours> cours;
 

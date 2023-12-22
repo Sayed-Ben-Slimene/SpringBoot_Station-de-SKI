@@ -26,7 +26,8 @@ public class Cours implements Serializable {
     Support support;
     Float prix;
     int creneau;
+
     @OneToMany(mappedBy = "cours")
-    Set<Inscription> insc;
+    Set<Inscription> inscriptions;
 
 }
