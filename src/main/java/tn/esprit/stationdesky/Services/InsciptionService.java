@@ -16,11 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class InsciptionService implements IInscription{
-    @Autowired
+
     InscriptionRepo InscriptionRepo;
-    @Autowired
-    SkieurRepo SkieurRepo;
-    @Autowired
+    SkieurRepo skieurRepo;
     CoursRepo coursRepository;
 
     @Override
@@ -41,7 +39,7 @@ public class InsciptionService implements IInscription{
 
     @Override
     public List<Inscription> getAllInscription() {
-        return InscriptionRepo.findAll();
+        return InscriptionRepo.findAll ();
     }
 
     @Override
@@ -50,37 +48,30 @@ public class InsciptionService implements IInscription{
     }
 
     @Override
-    public Inscription addRegistrationAndAssignToSkier (Inscription inscription, Long numSkier) {
-        Skieur skieur = SkieurRepo.findById(numSkier).orElse(null);
-        inscription.setSkieur(skieur);
-        return InscriptionRepo.save(inscription);
+    public Inscription addRegistrationAndAssignToSkier (Inscription registration, Long numSkier) {
+             Skieur skier =skieurRepo.findById(numSkier).get ();
+             registration.setSkieur (skier);
+         return InscriptionRepo.save(registration);
     }
 
     @Override
     public Inscription assignRegistrationToCourse (Long numRegistration, Long numCours) {
-        Cours cour =coursRepository.findById(numCours).orElseThrow(null);
-        Inscription inscri= InscriptionRepo.findById(numRegistration).orElseThrow();
-        inscri.setCours(cour);
-        return InscriptionRepo.save(inscri);
+            Cours cour = coursRepository.findById(numCours).get ();
+            Inscription registration = InscriptionRepo.findById (numRegistration).get ();
+            registration.setCours (cour);
+        return InscriptionRepo.save(registration);
     }
 
     @Override
-    public Inscription addRegistrationAndAssignToSkierAndCourse (Inscription inscription, Long numSkieur, Long numCours) {
-        Skieur skieur = SkieurRepo.findById(numSkieur).orElseThrow(() -> new NullPointerException("Skieur non trouvé avec le numéro : " + numSkieur));
-        Cours cours = coursRepository.findById(numCours).orElseThrow(() -> new NullPointerException("Cours non trouvé avec le numéro : " + numCours));
-            //verifi type cours et nb inscri
-            if (cours.getTypeCours() == TypeCours.COLLECTIF_ENFANT || cours.getTypeCours() == TypeCours.COLLECTIF_ADULTE) {
-                // Vérifier si nb inscri ne dépasse pas 6
-                List<Inscription> inscriptionsForCourse = InscriptionRepo.findByCours(cours);
-                if (inscriptionsForCourse.size() >= 6) {
-                    throw new RuntimeException("Le nombre maximal d'inscriptions pour ce cours a été atteint.");
-                }
-            }
-/*    if (cours.getTypeCours() == TypeCours.COLLECTIF_ENFANT && ageSkieur >= 18) {
-       throw new RuntimeException("Le skieur est trop vieux pour ce cours collectif enfant.");
-    }*/
-        inscription.setSkieur(skieur);
-        inscription.setCours(cours);
-        return InscriptionRepo.save(inscription);
+    public Inscription addRegistrationAndAssignToSkierAndCourse (Inscription registration, Long numSkieur, Long numCours) {
+        Skieur skier = skieurRepo.findById(numSkieur).orElse (null);
+        Cours cour = coursRepository.findById(numCours).orElse (null);
+
+
+        registration.setSkieur (skier);
+        registration.setCours (cour);
+        return InscriptionRepo.save (registration);
     }
+
+
 }

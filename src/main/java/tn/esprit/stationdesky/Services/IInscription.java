@@ -12,8 +12,12 @@ public interface IInscription {
     List<Inscription> getAllInscription();
     Inscription getInscription(long numInscription);
 
-    Inscription addRegistrationAndAssignToSkier(Inscription inscription, Long numSkier);
-
+    Inscription addRegistrationAndAssignToSkier(Inscription registration, Long numSkier);
     Inscription assignRegistrationToCourse(Long numRegistration, Long numCours);
-    Inscription addRegistrationAndAssignToSkierAndCourse(Inscription inscription, Long numSkieur, Long numCours);
+    Inscription addRegistrationAndAssignToSkierAndCourse(Inscription registration, Long numSkieur, Long numCours);
+
+
+
+
+
 }

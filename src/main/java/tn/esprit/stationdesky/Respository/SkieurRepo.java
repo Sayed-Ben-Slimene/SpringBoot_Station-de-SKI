@@ -10,6 +10,12 @@ import tn.esprit.stationdesky.entities.TypeAbonnement;
 import java.util.List;
 @Repository
 public interface SkieurRepo extends JpaRepository<Skieur,Long> {
-    @Query("select s from  Skieur s where s.abonnement=:abonnement")
-    List<Skieur> findByType(@Param("abonnement") TypeAbonnement typeAbonnement);
+
+/*
+    List<Skieur> findByAbonnementTypeAbonnement(TypeAbonnement typeAbonnement);
+*/
+    @Query("SELECT s FROM Skieur s WHERE s.abonnement.typeAbonnement = :typeAbonnement")
+
+    List<Skieur> findByAbonnementTypeAbonnement(@Param("typeAbonnement")TypeAbonnement typeAbonnement);
+
 }

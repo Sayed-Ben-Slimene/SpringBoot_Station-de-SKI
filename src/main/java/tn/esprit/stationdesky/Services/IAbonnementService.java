@@ -15,5 +15,4 @@ public interface IAbonnementService {
     Abonnement getAonnement(long numAbon);
     Set<Abonnement> getSubscriptionByType(TypeAbonnement type);
     List<Abonnement> retrieveSubscriptionsByDates(LocalDate startDate, LocalDate endDate);
-    void retrieveSubscriptions();
 }

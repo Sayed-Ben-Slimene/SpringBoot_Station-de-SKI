@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.stationdesky.Services.IAbonnementService;
 import tn.esprit.stationdesky.entities.Abonnement;
+import tn.esprit.stationdesky.entities.TypeAbonnement;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Tag(name = "Abonnement Management")
 @AllArgsConstructor
@@ -16,7 +19,7 @@ import java.util.List;
 @RestController
 public class AbonnementController {
 
-    @Autowired
+
     IAbonnementService abonnementService;
 
     @PostMapping("/add-abonnement")
@@ -37,4 +40,16 @@ public class AbonnementController {
     List<Abonnement> getAbonnements(){
         return abonnementService.getAllAonnement ();
     }
+
+    @GetMapping("/getSubscriptionByType")
+    Set<Abonnement> getSubscriptionByType(@PathParam("type_abonnement") TypeAbonnement type){
+        return abonnementService.getSubscriptionByType(type);
+    }
+
+    @GetMapping("/retrieveSubscriptionsByDates")
+    List<Abonnement> retrieveSubscriptionsByDates(@PathParam("dateDebut") LocalDate dateDebut ,@PathParam("dateFin") LocalDate dateFin){
+        return abonnementService.retrieveSubscriptionsByDates (dateDebut, dateFin);
+    }
+
+
 }

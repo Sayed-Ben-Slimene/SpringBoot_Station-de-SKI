@@ -14,7 +14,11 @@ public interface ISkieurService {
     public Skieur retreiveSkieur(long id);
     public void deleteSkieur(long id);
     List<Skieur> retreiveSkieurs();
+
+
+    Skieur assignSkierToPiste(Long numSkieur, Long numPiste);
     Skieur addSkierAndAssignToCourse(Skieur skier, Long numCourse);
+
     List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement);
     List<Abonnement> retrieveSubscriptionsByDates(LocalDate startDate,LocalDate endDate);
 

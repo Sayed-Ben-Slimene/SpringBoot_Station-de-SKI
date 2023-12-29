@@ -9,15 +9,15 @@ import tn.esprit.stationdesky.entities.Cours;
 import tn.esprit.stationdesky.entities.Moniteur;
 import tn.esprit.stationdesky.entities.Support;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
 @Service
 public class MoniteurService implements IMoniteurService{
-    @Autowired
     CoursRepo coursRepo;
-    @Autowired
+
     MoniteurRepo moniteurRepo;
 
     @Override
@@ -49,10 +49,13 @@ public class MoniteurService implements IMoniteurService{
 
     @Override
     public Moniteur addInstructorAndAssignToCourse (Moniteur moniteur, Long numCourse) {
-        Cours cours=coursRepo.findById(numCourse).orElseThrow(null);
-        Set<Cours> courses=moniteur.getCours();
-        moniteur.setCours(courses);
-        return moniteurRepo.save(moniteur);    }
+        Cours cours = coursRepo.findById(numCourse).get();
+        if (moniteur.getCours() == null) {
+            moniteur.setCours(new HashSet<> ());
+        }
+        moniteur.getCours().add(cours);
+        return moniteurRepo.save(moniteur);
+    }
 
     @Override
     public List<Integer> numWeeksCourseOfInstructorBySupport (Long numInstructor, Support support) {

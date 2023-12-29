@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/cours")
 @RestController
 public class CoursController {
-    @Autowired
+
     ICoursService coursService;
     @PostMapping("/add-cours")
     Cours addCours(@RequestBody Cours cours){

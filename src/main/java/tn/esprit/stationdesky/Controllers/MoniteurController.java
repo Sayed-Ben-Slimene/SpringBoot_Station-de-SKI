@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.stationdesky.Respository.MoniteurRepo;
 import tn.esprit.stationdesky.Services.IMoniteurService;
 import tn.esprit.stationdesky.entities.Cours;
 import tn.esprit.stationdesky.entities.Moniteur;
@@ -14,10 +15,8 @@ import java.util.List;
 @RequestMapping("/moniteur")
 @RestController
 public class MoniteurController {
-    @Autowired
+
     IMoniteurService moniteurService;
-
-
 
     @PostMapping("/add-moniteur")
     void addMoniteur(@RequestBody Moniteur moniteur){
@@ -38,5 +37,11 @@ public class MoniteurController {
     @GetMapping("/get-moniteur")
     List<Moniteur> getCourss(){
         return moniteurService.retreiveMoniteurs();
+    }
+
+
+    @PostMapping("/addInstructorAndAssignToCourse")
+    Moniteur addInstructorAndAssignToCourse(@RequestBody Moniteur  moniteur ,@RequestParam Long numCourse){
+        return moniteurService.addInstructorAndAssignToCourse (moniteur, numCourse);
     }
 }

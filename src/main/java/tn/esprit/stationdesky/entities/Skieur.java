@@ -1,5 +1,6 @@
 package tn.esprit.stationdesky.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,13 +26,14 @@ public class Skieur implements Serializable {
     String ville;
 
     @ManyToMany(mappedBy="skieurs")
-    private Set<Piste> pistes;
+    Set<Piste> pistes;
 
 
-    @OneToMany(mappedBy="skieur",cascade = CascadeType.ALL)
-    private Set<Inscription> inscriptions;
+    @OneToMany(mappedBy="skieur")
+     Set<Inscription> inscriptions;
 
     @OneToOne(cascade = CascadeType.ALL)
+     @JsonIgnore
     Abonnement abonnement;
     
 }

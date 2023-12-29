@@ -16,36 +16,30 @@ public class PisteService implements IPisteService {
     PisteRepo pisteRepositroy;
     @Autowired
     SkieurRepo skieurRepository;
+
     @Override
     public Piste add (Piste piste) {
-        return pisteRepositroy.save(piste);
+        return pisteRepositroy.save (piste);
     }
 
     @Override
     public Piste update (Piste piste) {
-        return pisteRepositroy.save(piste) ;
+        return pisteRepositroy.save (piste);
     }
 
     @Override
     public void remove (long numPiste) {
-        pisteRepositroy.deleteById(numPiste);
+        pisteRepositroy.deleteById (numPiste);
 
     }
 
     @Override
     public List<Piste> getAllPiste () {
-        return pisteRepositroy.findAll();
+        return pisteRepositroy.findAll ();
     }
 
     @Override
     public Piste getPiste (long numPiste) {
-        return  pisteRepositroy.findById(numPiste).orElseThrow(()-> new NullPointerException("Invalid"));
+        return pisteRepositroy.findById (numPiste).orElseThrow (() -> new NullPointerException ("Invalid"));
     }
-
-    @Override
-    public Skieur assignSkierToPiste (Long numSkieur, Long numPiste) {
-        Skieur skieur=skieurRepository.findById(numSkieur).orElseThrow(null);
-        Piste piste =pisteRepositroy.findById(numPiste).orElseThrow(null);
-        piste.getSkieurs().add(skieur);
-        return skieurRepository.save(skieur);    }
 }

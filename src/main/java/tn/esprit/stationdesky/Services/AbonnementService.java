@@ -42,16 +42,13 @@ public class AbonnementService implements IAbonnementService{
 
     @Override
     public Set<Abonnement> getSubscriptionByType (TypeAbonnement type) {
-        return abonnementRepository.findByType(type);
+        return abonnementRepository.findByTypeAbonnement(type);
     }
 
     @Override
     public List<Abonnement> retrieveSubscriptionsByDates (LocalDate startDate, LocalDate endDate) {
-        return abonnementRepository.findByDates(startDate,endDate);
+        return abonnementRepository.findByDateDebutAndDateFin (startDate, endDate);
     }
 
-    @Override
-    public void retrieveSubscriptions () {
 
-    }
 }

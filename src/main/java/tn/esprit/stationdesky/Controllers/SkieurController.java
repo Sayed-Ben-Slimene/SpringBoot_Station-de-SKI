@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.stationdesky.Services.ISkieurService;
 import tn.esprit.stationdesky.Services.SkieurService;
 import tn.esprit.stationdesky.entities.Skieur;
+import tn.esprit.stationdesky.entities.TypeAbonnement;
+
 import java.util.List;
 @Tag(name = "Skieur Management")
 @AllArgsConstructor
@@ -38,4 +40,21 @@ public class SkieurController {
     List<Skieur> getSkieurs(){
         return skieurService.retreiveSkieurs();
     }
+
+
+
+    @PostMapping("/assignSkierToPiste")
+    Skieur assignSkierToPiste(@RequestParam Long numSkieur,@RequestParam Long numPiste){
+        return skieurService.assignSkierToPiste (numSkieur,numPiste);
+    }
+    @PostMapping("/addSkierAndAssignToCourse/{numCourse}")
+    Skieur addSkierAndAssignToCourse(@RequestBody Skieur skier,@RequestParam Long numCours){
+        return skieurService.addSkierAndAssignToCourse(skier,numCours);
+    }
+    @GetMapping("/retrieveSkiersBySubscriptionType/{type_abonnement}")
+    List<Skieur> retrieveSkiersBySubscriptionType(@RequestParam TypeAbonnement typeAbonnement){
+        return skieurService.retrieveSkiersBySubscriptionType (typeAbonnement);
+    }
+
+
 }

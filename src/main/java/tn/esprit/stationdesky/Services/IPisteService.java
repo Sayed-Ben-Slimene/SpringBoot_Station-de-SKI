@@ -11,6 +11,5 @@ public interface IPisteService {
     void remove (long numPiste);
     List<Piste> getAllPiste();
     Piste getPiste(long numPiste);
-    Skieur assignSkierToPiste(Long numSkieur, Long numPiste);
 
 }
